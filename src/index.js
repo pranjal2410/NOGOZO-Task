@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter} from 'react-router-dom';
+import CredentialContextProvider from "./context/CredentialContext";
+import {SnackbarProvider} from "notistack";
+import CartContextProvider from "./context/CartContext";
+import CategoryContextProvider from "./context/CategoryContext";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <SnackbarProvider maxSnack={1}>
+      <CartContextProvider>
+        <CredentialContextProvider>
+              <CategoryContextProvider>
+                  <BrowserRouter>
+                      <App />
+                  </BrowserRouter>
+              </CategoryContextProvider>
+        </CredentialContextProvider>
+      </CartContextProvider>
+  </SnackbarProvider>,
   document.getElementById('root')
 );
 
